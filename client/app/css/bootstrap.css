@@ -2123,6 +2123,7 @@ fieldset[disabled] .btn-primary.active {
   color: #ffffff;
   background-color: #f0ad4e;
   border-color: #eea236;
+  font-weight: bold;
 }
 
 .btn-warning:hover,
@@ -4011,11 +4012,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
   border-top-left-radius: 0;
 }
 
-.navbar {
+.navbar{
   position: relative;
   z-index: 1000;
-  min-height: 50px;
+  min-height: 60px;
   margin-bottom: 20px;
+  padding-top: 8px;
   border: 1px solid transparent;
 }
 
@@ -4181,9 +4183,10 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-brand {
+  font-weight: bold;
   float: left;
   padding: 15px 15px;
-  font-size: 18px;
+  font-size: 25px;
   line-height: 20px;
 }
 
@@ -4822,7 +4825,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .label-default {
-  background-color: #999999;
+  background-color: #f0ad4e;
 }
 
 .label-default[href]:hover,

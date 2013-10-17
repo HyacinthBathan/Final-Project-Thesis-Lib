@@ -1,14 +1,21 @@
 <!doctype html>
 <html>
     <head>
-        <title>Project Title</title>
+        <title>Virtual CoE Library</title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </head>
     <body>
         <div id="fb-root"></div>
-
-
+        <script>
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=397247037070837";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
@@ -17,13 +24,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="javascript:void(0)">Project Title</a>
+                    <a class="navbar-brand" href="javascript:void(0)">Virtual CoE Library</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav menu-crud">
                         <li class='menu-create item'><a href="javascript:void(0)">Create New</a></li>
                         <li class='menu-list item'><a href="javascript:void(0)">Show All</a></li>
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         <li class='menu-loading'><a href="#">Loading...</a></li>
                         <li class="menu-user dropdown">
@@ -34,16 +42,23 @@
                             </ul>
                         </li>
                     </ul>
-                    <a href='#' class="btn btn-primary btn-login navbar-btn navbar-right">Log in</a>
+                    <a href='#' class="btn btn-warning btn-login navbar-btn navbar-right">LOG IN</a>
+                    <form class="navbar-form navbar-right form-search" role="search" _lpchecked="1">
+                        <div class="form-group">
+                          <input type="text" class="form-control search-input" placeholder="  Search Here">
+                        </div>
+                      </form>
                     </div>
                 </div>
             </div>
             <div class='container'>
+
                 <div class='row app-content'>
                 </div>
             </div>
         </div>
 
+        
         <!-- scripts -->
         <!-- =================== -->
         <script src="js/jquery.js"></script>
@@ -64,6 +79,8 @@
                             <th>Year</th>
                             <th>Title</th>
                             <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody class='thesis-list'>
@@ -76,15 +93,12 @@
             <tr data-id="{{Id}}">
                 <td>{{Year}}</td>
                 <td>{{Title}}</td>
-                <td><a href='#'>Edit</a></td>
+                <td>
+                    <a href='javascript:void(0)' class='btn-view'>View</a> &nbsp;
+                    <a href='javascript:void(0)' class='btn-edit'>Edit</a> &nbsp;
+                    <a href='javascript:void(0)' class='btn-delete'>Delete</a> &nbsp;
+                </td>
             </tr>
-        </script>
-
-         <script id="tpl-thesis-view" type="text/x-handlebars-template">
-            {{Title}} <br>
-            {{Year}} <br>
-            {{Description}} <br>
-            <div class="fb-comments" data-href="http://virtualcoelibrary.appspot.com/thesis-{{Id}}" data-numposts="8" data-width="700"></div>
         </script>
 
 
@@ -92,7 +106,7 @@
             <div class='col-md-7 thesis-form'>
                 <form role="form">
                     <div class="form-group">
-                        <label for="year-input">Year</label>
+                        <label class="year-input">Year</label>
                         <select id='year-input' name='Year' class="form-control">
                           <option value='2013' {{#compare Year '2013'}}selected{{/compare}}>2013</option>
                           <option value='2012' {{#compare Year '2012'}}selected{{/compare}}>2012</option>
@@ -102,25 +116,41 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="tite-input">Title</label>
-                        <input id='title-input' type="text" class="form-control" name='Title' placeholder="Enter title.." value='{{Title}}'>
+                        <label class="tite-input">Title</label>
+                        <input id='title-input' type="text" class="form-control" name='Title' placeholder="Enter Title" value='{{Title}}'>
                     </div>
                     <div class="form-group">
-                        <label for="subtite-input">Subtitle</label>
-                        <input id='subtitle-input' type="text" class="form-control" name='Subtitle' placeholder="Enter subtitle.." value='{{Subtitle}}'>
+                        <label class="subtite-input">Subtitle</label>
+                        <input id='subtitle-input' type="text" class="form-control" name='Subtitle' placeholder="Enter Subtitle" value='{{Subtitle}}'>
                     </div>
                     <div class="form-group">
-                        <label for="description-input">Description</label>
+                        <label class="description-input">Description</label>
                         <textarea id='description-input' name='Description' class="form-control" rows="3">{{Description}}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
                     {{#if Id}}
-                    <button class="btn btn-default">Delete</button>
+                        <input id='subtitle-input' type="text" style='display:none;' name='Id' value='{{Id}}'>
+                        <button class="btn-cancel btn btn-default">Cancel</button>
                     {{/if}}
+                    <button type="submit" class="btn btn-warning">Save</button>
                 </form>
+            </div>
+        </script>
+
+
+        <script id="tpl-thesis-detail" type="text/x-handlebars-template">
+            <div class="col-lg-8">
+                <hgroup>
+                    <h2 id = "titles">{{Title}}</h2>
+                    <h4 id = "subtitles">{{Subtitle}}</h4>
+                </hgroup>
+                <time id = "years">{{Year}}</time>
+                <hr>
+                <p id = "descriptions">{{Description}}</p>
+                <hr>
+                <div class="fb-like" data-href="https://virtualcoelibrary.appspot.com/thesis-{{Id}}" data-colorscheme="light" data-layout="standard" data-action="like" data-show-faces="true" data-send="false"></div>
+                <div class="fb-comments" data-href="https://virtualcoelibrary.appspot.com/thesis-{{Id}}"  data-width="The pixel width of the plugin"></div>
             </div>
         </script>
 
     </body>
 </html>
-

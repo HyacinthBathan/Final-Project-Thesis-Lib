@@ -1,7 +1,48 @@
 body {
     padding-top: 70px;
+   	background-image: url('books.jpg');
+   
 }
 
 .hidden {
     display: none;
 }
+
+.year-input{
+	color: #f0ad4e;
+}
+
+.tite-input{
+	color: #f0ad4e;
+}
+
+.subtite-input{
+	color: #f0ad4e;
+}
+
+.description-input{
+	color: #f0ad4e;
+}
+
+#titles{
+	color: #f0ad4e;
+}
+
+#subtitles{
+	color: #f0ad4e;
+}
+
+#years{
+	color: #f0ad4e;
+}
+
+#descriptions{
+	color: #f0ad4e;
+}
+
+.lead{
+	color: #f0ad4e;
+}
+
+
+
